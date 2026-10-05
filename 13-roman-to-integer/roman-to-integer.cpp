@@ -1,48 +1,22 @@
 class Solution {
 public:
     int romanToInt(string s) {
-        int ans=0;
-        for(char ch:s){  // basic version ,Linear scan + subtractive-pair correction using find()
-            if(ch=='I'){
-                ans+=1;
-            }
-            if(ch=='V'){
-                ans+=5;
-            }
-            if(ch=='X'){
-                ans+=10;
-            }
-            if(ch=='L'){
-                ans+=50;
-            }
-            if(ch=='C'){
-                ans+=100;
-            }
-            if(ch=='D'){
-                ans+=500;
-            }
-            if(ch=='M'){
-                ans+=1000;
-            }
+      int val[100]={};
+      val['I']=1;
+      val['V']=5;
+      val['X']=10;
+      val['L']=50;
+      val['C']=100;
+      val['D']=500;
+      val['M']=1000;
+      int ans=0;
+      for(int i=0;i<s.length();i++){
+        if(i+1<s.length()&& val[s[i]]<val[s[i+1]]){
+            ans-=val[s[i]];
+        }else{
+            ans+=val[s[i]];
         }
-         if(s.find("IV")!= string::npos){
-                ans-=2;
-            }
-            if(s.find("IX") != string::npos){
-                ans -= 2;
-            }
-            if(s.find("XL")!= string::npos){
-                ans-=20;
-            }
-            if(s.find("XC")!= string::npos){
-                ans-=20;
-            }
-            if(s.find("CD")!= string::npos){
-                ans-=200;
-            }
-            if(s.find("CM")!= string::npos){
-                ans-=200;
-            }
-        return ans;
+      }
+      return ans;
     }
 };
